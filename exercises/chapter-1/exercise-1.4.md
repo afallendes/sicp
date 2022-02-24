@@ -10,3 +10,5 @@ following procedure:
 ```
 
 # Answer
+
+The procedure uses a combination of `+` and `-` to compound an expression that evaluates as a sum expression if the value is `b` is greater than zero or as a subtraction otherwise.
