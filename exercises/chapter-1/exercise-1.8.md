@@ -27,11 +27,11 @@ Use this formula to implement a `cube-root` procedure analogous to the
 (define (improve-guess guess x)
     (/ (+ (/ x (expt guess 2)) (* 2 guess)) 3))
 
-(define (cuberoot-iter guess x)
+(define (cube-root-iter guess x)
     (if (good-enough? (cube guess) x)
         guess
-        (cuberoot-iter (improve-guess guess x) x)))
+        (cube-root-iter (improve-guess guess x) x)))
 
-(define (cuberoot x)
-    (cuberoot-iter 1.0 x))
+(define (cube-root x)
+    (cube-root-iter 1.0 x))
 ```
