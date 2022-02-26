@@ -1,10 +1,9 @@
 # Exercise 1.3
 
-## Problem
+Define a procedure that takes three numbers as arguments and returns the sum of 
+the squares of the two larger numbers.
 
-Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
-
-## Solution
+## Answer
 
 ```scheme
 (define (1larger2 a b)
