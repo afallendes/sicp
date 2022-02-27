@@ -46,14 +46,14 @@ When using `new-if` procedure:
 
 The program does not return a result and stays computing indefinitely instead.
 
-```
+```scheme
 > (sqrt (square 2))
 ...
 ```
 
 This is due to the applicative-order evaluation forcing the `new-if` to return a all primitives before evaluation, creating an infinite cycle of invoking and evaluation.
 
-```
+```scheme
 > (sqrt (1 2))
 . (new-if (good-enough? 1 2)
     1
