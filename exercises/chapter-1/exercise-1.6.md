@@ -57,22 +57,22 @@ This is due to the applicative-order evaluation forcing the `new-if` to return a
 > (sqrt (1 2))
 . (new-if (good-enough? 1 2)
     1
-    (sqrt-iter (improve-guess 1 2) 2)))
+    (sqrt-iter (improve-guess 1 2) 2))
 . (new-if #f 1 (sqrt-iter 1.5 2)))
 
 ... many iterations later ...
 
 . (new-if (good-enough? 2 2)
     2
-    (sqrt-iter (improve-guess 2 2) 2)))
+    (sqrt-iter (improve-guess 2 2) 2))
 . (new-if #t 2 (sqrt-iter 2 2)))
 . (new-if (good-enough? 2 2)
     2
-    (sqrt-iter (improve-guess 2 2) 2)))
+    (sqrt-iter (improve-guess 2 2) 2))
 . (new-if #t 2 (sqrt-iter 2 2)))
 . (new-if (good-enough? 2 2)
     2 
-    (sqrt-iter (improve-guess 2 2) 2)))
+    (sqrt-iter (improve-guess 2 2) 2))
 . (new-if #t 2 (sqrt-iter 2 2)))
 
 ... indefinitely ...
