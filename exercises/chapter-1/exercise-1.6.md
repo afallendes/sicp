@@ -35,45 +35,7 @@ square roots? Explain.
 
 ## Solution
 
-With the following program:
-
-```scheme
-(define (square x)
-    (expt x 2))
-
-(define (average x y)
-    (/ (+ x y) 2))
-
-(define (good-enough? guess x)
-    (< (abs (- x (square guess))) 0.001))
-
-(define (improve-guess guess x)
-    (average guess (/ x guess)))
-
-(define (sqrt-iter guess x)
-    (if (good-enough? guess x)
-        guess
-        (sqrt-iter (improve-guess guess x) x)))
-
-(define (sqrt x)
-    (sqrt-iter 1.0 x))
-```
-
-When using `if` special form:
-
-```scheme
-(define (sqrt-iter guess x)
-    (if (good-enough? guess x)
-        guess
-        (sqrt-iter (improve-guess guess x) x)))
-```
-
-```
-> (sqrt (square 2))
-2.0000000929222947
-```
-
-However, when using `new-if` procedure:
+When using `new-if` procedure:
 
 ```scheme
 (define (sqrt-iter guess x)
@@ -82,7 +44,36 @@ However, when using `new-if` procedure:
         (sqrt-iter (improve-guess guess x) x)))
 ```
 
+The program does not return a result and stays computing indefinitely instead.
+
 ```
 > (sqrt (square 2))
+...
+```
+
+This is due to the applicative-order evaluation forcing the `new-if` to return a all primitives before evaluation, creating an infinite cycle of invoking and evaluation.
+
+```
+> (sqrt (1 2))
+. (new-if (good-enough? 1 2)
+    1
+    (sqrt-iter (improve-guess 1 2) 2)))
+. (new-if #f 1 (sqrt-iter 1.5 2)))
+
+... many iterations later
+
+. (new-if (good-enough? 2 2)
+    2
+    (sqrt-iter (improve-guess 2 2) 2)))
+. (new-if #t 2 (sqrt-iter 2 2)))
+. (new-if (good-enough? 2 2)
+    2
+    (sqrt-iter (improve-guess 2 2) 2)))
+. (new-if #t 2 (sqrt-iter 2 2)))
+. (new-if (good-enough? 2 2)
+    2
+    (sqrt-iter (improve-guess 2 2) 2)))
+. (new-if #t 2 (sqrt-iter 2 2)))
+
 ...
 ```
